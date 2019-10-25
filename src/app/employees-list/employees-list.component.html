@@ -1,0 +1,24 @@
+<label>Filter by:</label><br>
+<input type = "text" id = "filter"><br><br>
+<label id = "count">Total Number of Employees: {{ count }}</label>
+<br><br>
+<table border="2">
+    <th>Emp ID</th>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Email</th>
+    <th>Mobile</th>
+    <th>Edit</th>
+    <th>Delete</th>
+<tr *ngFor = "let employee of employees">
+    <td><a routerLink="/">{{employee.id}}</a></td>
+    <td>{{employee.name}}</td>
+    <td>{{employee.location}}</td>
+    <td>{{employee.email}}</td>
+    <td>{{employee.mobile}}</td>
+    <td><a routerLink="/editEmployee"><button>Edit{{employee.id}}</button></a></td>
+    <td><a routerLink="/"><button>Delete{{employee.id}}</button></a></td>
+</tr>
+</table>
+
+
