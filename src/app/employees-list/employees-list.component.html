@@ -16,7 +16,8 @@
     <td id="loc{{employee.id}}">{{employee.location}}</td>
     <td id="email{{employee.id}}">{{employee.email}}</td>
     <td id="mob{{employee.id}}">{{employee.mobile}}</td>
-    <td><a routerLink="/editEmployee"><button>Edit{{employee.id}}</button></a></td>
+    <td><a [routerLink]="['/editEmployee', 'employee.id']">
+    <button>Edit{{employee.id}}</button></a></td>
     <td><button 
     (click)="delete(employee); $event.stopPropagation()">Delete{{employee.id}}</button></td>
 </tr>
