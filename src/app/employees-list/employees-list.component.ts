@@ -13,8 +13,15 @@ export class EmployeesListComponent implements OnInit {
   employees: Employee[] = [];
   constructor(private employeeService: EmployeeService) { }
   ngOnInit() {
-    this.employeeService.getEmployees()
-    .subscribe(employees => this.employees = employees);
+  this.getEmployees();
   } 
+  getEmployees(): void{
+  this.employeeService.getEmployees()
+    .subscribe(employees => this.employees = employees);
+  }
+  delete(employee: Employee): void {
+  this.employees = this.employees.filter(emp => emp !== employee);
+  this.employeeService.deleteEmployee(employee).subscribe();
+  }
 
 }
