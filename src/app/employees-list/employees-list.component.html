@@ -1,5 +1,5 @@
 <label>Filter by:</label><br>
-<input type = "text" id = "filter"><br><br>
+<input type = "text" id = "filter" [(ngModel)]="filterby"><br><br>
 <label id = "count">Total Number of Employees: {{ count }}</label>
 <br><br>
 <table border="2">
@@ -10,7 +10,7 @@
     <th>Mobile</th>
     <th>Edit</th>
     <th>Delete</th>
-<tr *ngFor = "let employee of employees">
+<tr *ngFor = "let employee of filteredEmployees">
     <td><a [routerLink] = "['/details',employee.id]">{{employee.id}}</a></td>
     <td id="name{{employee.id}}">{{employee.name}}</td>
     <td id="loc{{employee.id}}">{{employee.location}}</td>

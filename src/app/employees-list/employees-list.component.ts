@@ -10,17 +10,29 @@ import { Employee } from '../employee';
 })
 export class EmployeesListComponent implements OnInit {
   title = 'Employees List';
-  employees: Employee[] = [];
+  employees: Employee[];
+  filteredEmployees: Employee[];
+  _filterby: string;
   count: number;
   constructor(private employeeService: EmployeeService, private router: Router) { }
   ngOnInit() {
-  this.getEmployees();
-  } 
-  getEmployees(): void{
   this.employeeService.getEmployees()
     .subscribe(employees => {this.employees = employees;
+                             this.filteredEmployees = employees;
                              this.count = employees.length;
                             });
+  this._filterby = "";
+  } 
+  get filterby(): string {
+    return this._filterby;
+  }
+  set filterby(value: string) {
+    this._filterby = value;
+    this.filteredEmployees = this._filterby ? this.filter(this._filterby) : this.employees;
+  }
+  filter(filterBy: string): Employee[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.employees.filter((employee: Employee) => employee.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
   delete(employee: Employee): void {
   this.employees = this.employees.filter(emp => emp !== employee);
