@@ -18,7 +18,7 @@ export class AddEmployeeComponent implements OnInit {
   var employee = new Employee(name, location, email, mobile);
   this.employeeService.addEmployee(employee)
     .subscribe(employee => {
-      this.router.navigate(['/details', employee.id]);
+      this.router.navigate(["employees"]);
       });
 }
 

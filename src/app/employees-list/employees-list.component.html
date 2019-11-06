@@ -11,7 +11,7 @@
     <th>Edit</th>
     <th>Delete</th>
 <tr *ngFor = "let employee of employees">
-    <td><a routerLink="/">{{employee.id}}</a></td>
+    <td><a [routerLink] = "['/details',employee.id]">{{employee.id}}</a></td>
     <td id="name{{employee.id}}">{{employee.name}}</td>
     <td id="loc{{employee.id}}">{{employee.location}}</td>
     <td id="email{{employee.id}}">{{employee.email}}</td>
