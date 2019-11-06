@@ -31,7 +31,7 @@ import { EmployeeService } from './employee.service';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [EmployeeService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
