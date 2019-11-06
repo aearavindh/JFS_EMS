@@ -16,12 +16,7 @@ export class EmployeesListComponent implements OnInit {
   count: number;
   constructor(private employeeService: EmployeeService, private router: Router) { }
   ngOnInit() {
-  this.employeeService.getEmployees()
-    .subscribe(employees => {this.employees = employees;
-                             this.filteredEmployees = employees;
-                             this.count = employees.length;
-                            });
-  this._filterby = "";
+  this.getEmployees();
   } 
   get filterby(): string {
     return this._filterby;
@@ -30,14 +25,23 @@ export class EmployeesListComponent implements OnInit {
     this._filterby = value;
     this.filteredEmployees = this._filterby ? this.filter(this._filterby) : this.employees;
   }
+  getEmployees(): void{
+  this.employeeService.getEmployees()
+    .subscribe(employees => {this.employees = employees;
+                             this.filteredEmployees = employees;
+                             this.count = employees.length;
+                             this._filterby = "";
+                            });
+  }
   filter(filterBy: string): Employee[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.employees.filter((employee: Employee) => employee.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
   delete(employee: Employee): void {
-  this.employees = this.employees.filter(emp => emp !== employee);
+  this.filteredEmployees = this.filteredEmployees.filter(emp => emp !== employee);
   this.employeeService.deleteEmployee(employee).subscribe();
   this.count = this.count - 1;
+  this.getEmployees();
   }
   edit(employee: Employee): void{
   this.router.navigate(['/editEmployee', employee.id]);
