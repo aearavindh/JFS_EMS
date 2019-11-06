@@ -1,4 +1,9 @@
+import 'rxjs/add/operator/switchMap';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+
+import { Employee }        from '../employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-details',
@@ -7,9 +12,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
   title = 'Employee Details';
-  constructor() { }
+  employee: Employee;
+  constructor(private employeeService: EmployeeService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.employeeService.getEmployee(+params.get('id')))
+      .subscribe(employee => this.employee = employee);
   }
 
 }

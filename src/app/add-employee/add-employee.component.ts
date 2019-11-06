@@ -10,18 +10,16 @@ import { EmployeeService } from '../employee.service';
 })
 export class AddEmployeeComponent implements OnInit {
   title = 'Add Employee';
-  employees: Employee[];
-  id: number = 3;
   constructor(private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() {
   }
   add(name: string, location: string, email: string, mobile: string): void {
-  this.id = this.id + 1;
-  var employee = new Employee(this.id, name, location, email, mobile);
+  var employee = new Employee(name, location, email, mobile);
   this.employeeService.addEmployee(employee)
-    .subscribe(employee);
-  this.router.navigate(["details"]);
+    .subscribe(employee => {
+      this.router.navigate(['/details', employee.id]);
+      });
 }
 
 }

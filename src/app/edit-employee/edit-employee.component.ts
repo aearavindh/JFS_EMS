@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }        from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Employee }        from '../employee';
 import { EmployeeService } from '../employee.service';
@@ -16,7 +16,8 @@ export class EditEmployeeComponent implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class EditEmployeeComponent implements OnInit {
   }
   update(): void {
     this.employeeService.update(this.employee)
-      .subscribe(() => this.goBack());
+      .subscribe(() => this.router.navigate(["employees"]));
   }
 
 }

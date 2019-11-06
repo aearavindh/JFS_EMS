@@ -25,6 +25,7 @@ getEmployee(id: number): Observable<Employee> {
   const url = `${this.employeesUrl}/${id}`;
   return this.http.get<Employee>(url);
 }
+
 addEmployee (employee: Employee): Observable<Employee> {
   return this.http.post<Employee>(this.employeesUrl, employee, this.httpOptions);
 }
@@ -34,8 +35,7 @@ deleteEmployee(employee : Employee): Observable<Employee> {
 }
 update(employee: Employee): Observable<Employee> {
     const url = `${this.employeesUrl}/${employee.id}`;
-    return this.http
-        .put(url, employee, this.httpOptions);
+    return this.http.put(url, employee, this.httpOptions);
 }
 
 }
