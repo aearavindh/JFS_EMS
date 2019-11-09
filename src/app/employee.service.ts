@@ -35,7 +35,7 @@ deleteEmployee(employee : Employee): Observable<Employee> {
 }
 update(employee: Employee): Observable<Employee> {
     const url = `${this.employeesUrl}/${employee.id}`;
-    return this.http.put(url, employee, this.httpOptions);
+    return this.http.put<Employee>(url, employee, this.httpOptions);
 }
 
 }
