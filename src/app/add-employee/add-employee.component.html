@@ -7,7 +7,9 @@
     </tr>
     <tr>
         <td><label>Location:</label></td>
-        <td><input type="text" #empLocation id="location"></td>
+        <td><select #empLocation id="location">
+          <option *ngFor="let location of locationList">{{location}}</option>
+          </select></td>
     </tr>
     <tr>
         <td><label>Email:</label></td>

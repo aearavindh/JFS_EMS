@@ -10,6 +10,7 @@ import { EmployeeService } from '../employee.service';
 })
 export class AddEmployeeComponent implements OnInit {
   title = 'Add Employee';
+  locationList = ['Bangalore','Chennai','Pune','Hyderabad'];
   constructor(private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() {

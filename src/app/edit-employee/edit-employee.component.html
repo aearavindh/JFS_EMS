@@ -7,7 +7,10 @@
     </tr>
     <tr>
         <td><label>Location:</label></td>
-        <td><input type="text" [(ngModel)]="employee.location" id="location"></td>
+        <td><select id="location" [(ngModel)]="employee.location">
+          <option selected>{{employee.location}}</option>
+          <option *ngFor="let location of locationList">{{location}}</option>
+          </select></td>
     </tr>
     <tr>
         <td><label>Email:</label></td>

@@ -12,6 +12,7 @@ import { EmployeeService } from '../employee.service';
 })
 export class EditEmployeeComponent implements OnInit {
   title = 'Edit Employee';
+  locationList = ['Bangalore','Chennai','Pune','Hyderabad'];
   employee: Employee;
 
   constructor(
@@ -23,7 +24,9 @@ export class EditEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.employeeService.getEmployee(+params.get('id')))
-      .subscribe(employee => this.employee = employee);
+      .subscribe(employee => {this.employee = employee;
+                              this.locationList = this.locationList.filter(loc => loc !== this.employee.location);
+      });
   }
   update(): void {
     this.employeeService.update(this.employee)
