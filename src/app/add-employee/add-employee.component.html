@@ -1,5 +1,6 @@
 <label><b>{{ title }}</b></label><br>
 <hr>
+<form #empForm="ngForm">
 <table>
     <tr>
         <td><label>Employee Name:</label></td>
@@ -32,6 +33,7 @@
         </div></td>
     </tr>
     <tr>
-        <td colspan="2"><button id="add" (click)="add(empName.value,empLocation.value,empEmail.value,empMobile.value)">Submit</button></td>
+        <td colspan="2"><button [disabled]="empName.errors || empEmail.errors || empMobile.errors" id="add" (click)="add(empName.value,empLocation.value,empEmail.value,empMobile.value)">Submit</button></td>
     </tr>
 </table>
+</form>

@@ -1,26 +1,40 @@
 <label><b>{{ title }}</b></label><br>
 <hr>
+<form #empForm="ngForm">
 <table>
     <tr>
         <td><label>Employee Name:</label></td>
-        <td><input type="text" [(ngModel)]="employee.name" id="name" min="3"></td>
+        <td><input type="text" [(ngModel)]="employee.name" pattern="^[a-zA-Z]{3,}$" required #empName="ngModel" name="empName">
+        <div *ngIf="empName.errors && (empName.invalid || empName.touched)">
+          <small *ngIf="empName.errors.required && empName.touched">Name is required</small>
+          <small *ngIf="empName.errors.pattern">Please enter valid name</small>
+        </div></td>
     </tr>
     <tr>
         <td><label>Location:</label></td>
-        <td><select id="location" [(ngModel)]="employee.location">
+        <td><select [(ngModel)]="employee.location" name="empLocation">
           <option selected>{{employee.location}}</option>
           <option *ngFor="let location of locationList">{{location}}</option>
           </select></td>
     </tr>
     <tr>
         <td><label>Email:</label></td>
-        <td><input type="email" [(ngModel)]="employee.email" id="email"></td>
+        <td><input type="email" [(ngModel)]="employee.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required #empEmail="ngModel" name="empEmail" ngModel>
+        <div *ngIf="empEmail.errors && (empEmail.invalid || empEmail.touched)">
+          <small *ngIf="empEmail.errors.required && empEmail.touched">Email is required</small>
+          <small *ngIf="empEmail.errors.pattern">Please enter valid email</small>
+        </div></td>
     </tr>
     <tr>
         <td><label>Mobile:</label></td>
-        <td><input type="text" [(ngModel)]="employee.mobile" id="mobile" min="8" max="10"></td>
+        <td><input type="text" [(ngModel)]="employee.mobile" pattern="^\d{10}$" required #empMobile="ngModel" name="empMobile" ngModel>
+        <div *ngIf="empMobile.errors && (empMobile.invalid || empMobile.touched)">
+          <small *ngIf="empMobile.errors.required && empMobile.touched">Phone number is required</small>
+          <small *ngIf="empMobile.errors.pattern">Phone number must be 10 digits</small>
+        </div></td>
     </tr>
     <tr>
-        <td colspan="2"><button (click)="update()" id="edit">Update</button></td>
+        <td colspan="2"><button [disabled]="empName.errors || empEmail.errors || empMobile.errors || empForm.pristine" (click)="update()" id="edit">Update</button></td>
     </tr>
 </table>
+</form>
