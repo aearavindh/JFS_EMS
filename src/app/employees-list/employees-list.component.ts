@@ -24,6 +24,7 @@ export class EmployeesListComponent implements OnInit {
   set filterby(value: string) {
     this._filterby = value;
     this.filteredEmployees = this._filterby ? this.filter(this._filterby) : this.employees;
+    this.count = this.filteredEmployees.length;
   }
   getEmployees(): void{
   this.employeeService.getEmployees()
