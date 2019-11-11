@@ -4,7 +4,7 @@
 <table>
     <tr>
         <td><label>Employee Name:</label></td>
-        <td><input type="text" pattern="^[a-zA-Z]{3,}$" required #empName="ngModel" name="empName" ngModel>
+        <td><input type="text" pattern="^[a-zA-Z _]{3,}$" required #empName="ngModel" name="empName" ngModel>
         <div *ngIf="empName.errors && (empName.invalid || empName.touched)">
           <small *ngIf="empName.errors.required && empName.touched">Name is required</small>
           <small *ngIf="empName.errors.pattern">Please enter valid name</small>
