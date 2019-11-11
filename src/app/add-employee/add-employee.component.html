@@ -3,21 +3,33 @@
 <table>
     <tr>
         <td><label>Employee Name:</label></td>
-        <td><input type="text" #empName id="name" min="3"></td>
+        <td><input type="text" pattern="^[a-zA-Z]{3,}$" required #empName="ngModel" name="empName" ngModel>
+        <div *ngIf="empName.errors && (empName.invalid || empName.touched)">
+          <small *ngIf="empName.errors.required && empName.touched">Name is required</small>
+          <small *ngIf="empName.errors.pattern">Please enter valid name</small>
+        </div></td>
     </tr>
     <tr>
         <td><label>Location:</label></td>
-        <td><select #empLocation id="location">
+        <td><select #empLocation name="empLocation">
           <option *ngFor="let location of locationList">{{location}}</option>
           </select></td>
     </tr>
     <tr>
         <td><label>Email:</label></td>
-        <td><input type="email" #empEmail id="email"></td>
+        <td><input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required #empEmail="ngModel" name="empEmail" ngModel>
+        <div *ngIf="empEmail.errors && (empEmail.invalid || empEmail.touched)">
+          <small *ngIf="empEmail.errors.required && empEmail.touched">Email is required</small>
+          <small *ngIf="empEmail.errors.pattern">Please enter valid email</small>
+        </div></td>
     </tr>
     <tr>
         <td><label>Mobile:</label></td>
-        <td><input type="text" #empMobile id="mobile" min="8" max="10"></td>
+        <td><input type="text" pattern="^\d{10}$" required #empMobile="ngModel" name="empMobile" ngModel>
+        <div *ngIf="empMobile.errors && (empMobile.invalid || empMobile.touched)">
+          <small *ngIf="empMobile.errors.required && empMobile.touched">Phone number is required</small>
+          <small *ngIf="empMobile.errors.pattern">Phone number must be 10 digits</small>
+        </div></td>
     </tr>
     <tr>
         <td colspan="2"><button id="add" (click)="add(empName.value,empLocation.value,empEmail.value,empMobile.value)">Submit</button></td>
